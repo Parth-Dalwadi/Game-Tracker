@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyGameList"
+        xmlns:viewModel="clr-namespace:MyGameList.MVVM.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="920"
         WindowStyle="None"
@@ -11,6 +12,10 @@
         Background="Transparent"
         AllowsTransparency="True"
  >
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
+    
     <Border Background="#1a1b36"
             CornerRadius="20"
      >
@@ -30,6 +35,7 @@
                        HorizontalAlignment="Left"
                        Foreground="White"
                        FontSize="22"
+                       FontFamily="/Fonts/#Poppins"
                        Margin="20, 0, 0, 0"
              />
 
@@ -39,12 +45,15 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"
                  />
                 <RadioButton Content="My List"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding TempViewCommand}"
                  />
             </StackPanel>
             
@@ -60,6 +69,7 @@
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Margin="10"
+                            Content="{Binding CurrentView}"
              >
                 
             </ContentControl>
