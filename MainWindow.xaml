@@ -47,6 +47,7 @@
                              Style="{StaticResource MenuButtonTheme}"
                  />
             </StackPanel>
+            
             <TextBox Width="250"
                      Height="40"
                      VerticalContentAlignment="Center"
@@ -55,6 +56,13 @@
                      Grid.Column="1"
                      Style="{StaticResource SearchBar}"
              />
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"
+             >
+                
+            </ContentControl>
         </Grid>
     </Border>
 </Window>
