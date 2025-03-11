@@ -67,6 +67,13 @@
                      Style="{StaticResource SearchBar}"
              />
 
+            <Button Width="50"
+                    Height="40"     
+                    Grid.Column="1" Margin="255,15,415,10"
+                    Click="Button_Click"
+             >
+            </Button>
+
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Margin="10"
