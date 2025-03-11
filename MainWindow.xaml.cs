@@ -32,6 +32,8 @@ namespace MyGameList
         public MainWindow()
         {
             InitializeComponent();
+            client.DefaultRequestHeaders.Add("Client-ID", "FAKE-ID");
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer FAKE-TOKEN");
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -48,8 +50,6 @@ namespace MyGameList
             {
                 new KeyValuePair<string, string>("fields", "*;"),
             };
-            client.DefaultRequestHeaders.Add("Client-ID", "FAKE-ID");
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer FAKE-TOKEN");
             var content = new StringContent("fields *;\nwhere name = \"Super Mario 64\";", Encoding.UTF8, "application/json");
             var response = client.PostAsync("https://api.igdb.com/v4/games", content).Result;
             if (response.IsSuccessStatusCode)
