@@ -17,6 +17,7 @@ using System.Xml.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 
 namespace MyGameList
@@ -49,12 +50,16 @@ namespace MyGameList
             };
             client.DefaultRequestHeaders.Add("Client-ID", "FAKE-ID");
             client.DefaultRequestHeaders.Add("Authorization", "Bearer FAKE-TOKEN");
-            var content = new StringContent("fields *;", Encoding.UTF8, "application/json");
+            var content = new StringContent("fields *;\nwhere name = \"Super Mario 64\";", Encoding.UTF8, "application/json");
             var response = client.PostAsync("https://api.igdb.com/v4/games", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 Trace.WriteLine("Success");
-                Trace.WriteLine(response);
+                //Trace.WriteLine(response);
+                var jsonTask = response.Content.ReadAsStringAsync();
+                jsonTask.Wait();
+                var jsonStringResult = jsonTask.Result;
+                Trace.WriteLine(jsonStringResult);
             } else
             {
                 Trace.WriteLine("Fail");
