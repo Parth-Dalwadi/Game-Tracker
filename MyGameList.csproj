@@ -64,6 +64,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="API\Client\Client.cs" />
+    <Compile Include="API\Game.cs" />
+    <Compile Include="API\Client\GameClient.cs" />
+    <Compile Include="API\Image.cs" />
+    <Compile Include="API\Client\ImageClient.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -136,6 +141,9 @@
     <Resource Include="secrets.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="secrets-example.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
