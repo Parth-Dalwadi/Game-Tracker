@@ -65,10 +65,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="API\Client\Client.cs" />
+    <Compile Include="API\Client\IClient.cs" />
     <Compile Include="API\Game.cs" />
     <Compile Include="API\Client\GameClient.cs" />
     <Compile Include="API\Image.cs" />
     <Compile Include="API\Client\ImageClient.cs" />
+    <Compile Include="API\Item.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

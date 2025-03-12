@@ -9,9 +9,8 @@ using System.Web.Script.Serialization;
 
 namespace MyGameList.API
 {
-    class Game
+    class Game : Item
     {
-        public int id { get; set; }
         public string name { get; set; }
         public string summary { get; set; }
     }

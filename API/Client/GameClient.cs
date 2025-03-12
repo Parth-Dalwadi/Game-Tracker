@@ -9,18 +9,18 @@ using System.Web.Script.Serialization;
 
 namespace MyGameList.API.Client
 {
-    class GameClient : Client
+    class GameClient : Client, IClient<Game>
     {
         public GameClient(HttpClient client)
         {
             this.client = client;
         }
 
-        public async Task<Game[]> Get_Games()
+        public async Task<Game[]> GetAsync(object item)
         {
             return await Task.Run(() =>
             {
-                var content = new StringContent("fields *;\nwhere name = \"Super Mario 64\";", Encoding.UTF8, "application/json");
+                var content = new StringContent("fields *;\nwhere name = \"" + item + "\";", Encoding.UTF8, "application/json");
                 var response = client.PostAsync("https://api.igdb.com/v4/games", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -31,7 +31,8 @@ namespace MyGameList.API.Client
                     JavaScriptSerializer js = new JavaScriptSerializer();
                     Game[] games = js.Deserialize<Game[]>(jsonStringResult);
                     return games;
-                } else
+                }
+                else
                 {
                     Game[] games = new Game[0];
                     return games;

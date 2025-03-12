@@ -56,12 +56,24 @@ namespace MyGameList
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            Game[] games = await gameClient.Get_Games();
-            Image[] images = await imageClient.Get_Images(games[0].id);
-            Trace.WriteLine(games[0].id);
-            Trace.WriteLine(games[0].name);
-            Trace.WriteLine(images[0].id);
-            Trace.WriteLine(images[0].url);
+            Game[] games = await gameClient.GetAsync("Super Mario 64");
+            if (games != null && games.Length != 0)
+            {
+                Trace.WriteLine(games[0].id);
+                Trace.WriteLine(games[0].name);
+                Image[] images = await imageClient.GetAsync(games[0].id);
+                if (images != null && images.Length != 0)
+                {
+                    Trace.WriteLine(images[0].id);
+                    Trace.WriteLine(images[0].url);
+                } else
+                {
+                    Trace.WriteLine("Images is empty");
+                }
+            } else
+            {
+                Trace.WriteLine("Games is empty");
+            }
         }
     }
 }

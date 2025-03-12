@@ -9,17 +9,17 @@ using System.Web.Script.Serialization;
 
 namespace MyGameList.API.Client
 {
-    class ImageClient : Client
+    class ImageClient : Client, IClient<Image>
     {
         public ImageClient(HttpClient client)
         {
             this.client = client;
         }
-        public async Task<Image[]> Get_Images(int id)
+        public async Task<Image[]> GetAsync(object item)
         {
             return await Task.Run(() =>
             {
-                var content = new StringContent("fields *;\nwhere id = " + id + ";", Encoding.UTF8, "application/json");
+                var content = new StringContent("fields *;\nwhere id = " + item + ";", Encoding.UTF8, "application/json");
                 var response = client.PostAsync("https://api.igdb.com/v4/artworks", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
