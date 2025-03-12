@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -9,31 +8,31 @@ using System.Web.Script.Serialization;
 
 namespace MyGameList.API.Client
 {
-    class ImageClient : Client, IClient<Image>
+    class CoverClient : Client, IClient<Cover>
     {
-        public ImageClient(HttpClient client)
+        public CoverClient(HttpClient client)
         {
             this.client = client;
         }
-        public async Task<Image[]> GetAsync(object item)
+        public async Task<Cover[]> GetAsync(object item)
         {
             return await Task.Run(() =>
             {
                 var content = new StringContent("fields *;\nwhere id = " + item + ";", Encoding.UTF8, "application/json");
-                var response = client.PostAsync("https://api.igdb.com/v4/artworks", content).Result;
+                var response = client.PostAsync("https://api.igdb.com/v4/covers", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonTask = response.Content.ReadAsStringAsync();
                     jsonTask.Wait();
                     var jsonStringResult = jsonTask.Result;
                     JavaScriptSerializer js = new JavaScriptSerializer();
-                    Image[] images = js.Deserialize<Image[]>(jsonStringResult);
-                    return images;
+                    Cover[] covers = js.Deserialize<Cover[]>(jsonStringResult);
+                    return covers;
                 }
                 else
                 {
-                    Image[] images = new Image[0];
-                    return images;
+                    Cover[] covers = new Cover[0];
+                    return covers;
                 }
             });
         }
