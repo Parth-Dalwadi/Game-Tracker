@@ -22,7 +22,7 @@ using System.Web.Script.Serialization;
 using System.IO;
 using MyGameList.API;
 using MyGameList.API.Client;
-using Image = MyGameList.API.Image;
+using Artwork = MyGameList.API.Artwork;
 
 
 namespace MyGameList
@@ -34,7 +34,8 @@ namespace MyGameList
     {
         private static readonly HttpClient client = new HttpClient();
         private GameClient gameClient;
-        private ImageClient imageClient;
+        private ArtworkClient imageClient;
+        private CoverClient coverClient;
 
         public MainWindow()
         {
@@ -43,7 +44,8 @@ namespace MyGameList
             client.DefaultRequestHeaders.Add("Client-ID", contents[0].Split('=')[1]);
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + contents[1].Split('=')[1]);
             gameClient = new GameClient(client);
-            imageClient = new ImageClient(client);
+            imageClient = new ArtworkClient(client);
+            coverClient = new CoverClient(client);
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -56,12 +58,12 @@ namespace MyGameList
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            Game[] games = await gameClient.GetAsync("Super Mario 64");
+            Game[] games = await gameClient.GetAsync("Xenoblade Chronicles 3");
             if (games != null && games.Length != 0)
             {
                 Trace.WriteLine(games[0].id);
                 Trace.WriteLine(games[0].name);
-                Image[] images = await imageClient.GetAsync(games[0].id);
+                Cover[] images = await coverClient.GetAsync(games[0].id);
                 if (images != null && images.Length != 0)
                 {
                     Trace.WriteLine(images[0].id);
