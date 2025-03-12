@@ -64,7 +64,8 @@
                      HorizontalAlignment="Left"
                      Margin="5"
                      Grid.Column="1"
-                     Style="{StaticResource SearchBar}"
+                     Name="SearchBar"
+                     Style="{StaticResource SearchBar}" TextChanged="searchBarTextChanged"
              />
 
             <Button Width="50"

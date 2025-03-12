@@ -36,6 +36,7 @@ namespace MyGameList
         private GameClient gameClient;
         private ArtworkClient imageClient;
         private CoverClient coverClient;
+        private string searchText = "";
 
         public MainWindow()
         {
@@ -58,7 +59,7 @@ namespace MyGameList
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            Game[] games = await gameClient.GetAsync("Xenoblade Chronicles 3");
+            Game[] games = await gameClient.GetAsync(searchText);
             if (games != null && games.Length != 0)
             {
                 Trace.WriteLine(games[0].id);
@@ -76,6 +77,11 @@ namespace MyGameList
             {
                 Trace.WriteLine("Games is empty");
             }
+        }
+
+        private void searchBarTextChanged(object sender, TextChangedEventArgs e)
+        {
+            searchText = SearchBar.Text;
         }
     }
 }
