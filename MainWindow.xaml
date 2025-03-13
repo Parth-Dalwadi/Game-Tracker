@@ -65,7 +65,7 @@
                      Margin="5"
                      Grid.Column="1"
                      Name="SearchBar"
-                     Style="{StaticResource SearchBar}" TextChanged="searchBarTextChanged"
+                     Style="{StaticResource SearchBar}" TextChanged="SearchBarTextChanged" KeyDown="Search"
              />
 
             <Button Width="50"

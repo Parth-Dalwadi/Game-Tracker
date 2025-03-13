@@ -79,9 +79,17 @@ namespace MyGameList
             }
         }
 
-        private void searchBarTextChanged(object sender, TextChangedEventArgs e)
+        private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
         {
             searchText = SearchBar.Text;
+        }
+
+        private void Search(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                Button_Click(this, new RoutedEventArgs());
+            }
         }
     }
 }
